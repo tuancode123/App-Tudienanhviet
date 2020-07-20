@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtEnglish"
+        android:hint="Từ tiếng Anh" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtVietNam"
+        android:hint="Nghĩa tiếng Việt" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnAddBook"
+            android:layout_weight="1"
+            android:onClick="addVocabulary"
+            android:layout_marginTop="5dp"
+            android:text="Lưu" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnCanel"
+            android:onClick="cancelAddVocabulary"
+            android:layout_weight="1"
+            android:text="Hủy"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>
