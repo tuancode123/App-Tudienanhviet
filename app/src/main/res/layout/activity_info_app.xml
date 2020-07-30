@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/android"
     android:orientation="vertical"
     tools:context="com.example.dictionary.InfoAppActivity">
 
@@ -18,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#4B4B4B"
+            android:textColor="#ffff"
             android:text="Tác giả : " />
 
         <TextView
@@ -51,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#4B4B4B"
+            android:textColor="#ffff"
             android:text="Tên ứng dụng : " />
 
         <TextView
@@ -85,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#4B4B4B"
+            android:textColor="#ffff"
             android:text="Phiên bản ứng dụng : " />
 
         <TextView
@@ -118,7 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#4B4B4B"
+            android:textColor="#ffff"
             android:text="Số lượng từ vựng : " />
 
         <TextView

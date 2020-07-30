@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.dictionary.R;
 import com.example.dictionary.adapter.TuVungAdapter;
+import com.example.dictionary.dao.TranslateHistoryDAO;
 import com.example.dictionary.dao.TuVungDAO;
 import com.example.dictionary.model.TuVung;
 
@@ -30,6 +31,7 @@ ImageView imageView;
 
     List<TuVung> listVocabulary = new ArrayList<>();
     TuVungDAO tuVungDAO;
+    TranslateHistoryDAO translateHistoryDAO;
     TuVungAdapter tuVungAdapter;
 
     private static final int requestCodeP  = 113;
@@ -48,6 +50,7 @@ ImageView imageView;
         lvVocabulary=findViewById(R.id.lvVocabulary);
 
         tuVungDAO = new TuVungDAO(SpeechToTextActivity.this);
+        translateHistoryDAO = new TranslateHistoryDAO(SpeechToTextActivity.this);
         tuVungAdapter = new TuVungAdapter(this, listVocabulary);
         lvVocabulary.setAdapter(tuVungAdapter);
     }
@@ -83,8 +86,14 @@ ImageView imageView;
                     TuVung t = tuVungDAO.getTuVungByID(result.get(0).trim());
                     if (t != null) {
                         Log.e("ListVocabularyActivity", t.toString());
-                        tuVungAdapter.setResultSearch(t);
+                        listVocabulary.clear();
+                        listVocabulary.add(t);
+                        tuVungAdapter.notifyDataSetChanged();
+                        translateHistoryDAO.insertTuVung(t);
+                       // tuVungAdapter.setResultSearch(t);
                     } else {
+                        listVocabulary.clear();
+                        tuVungAdapter.notifyDataSetChanged();
                         Toast.makeText(SpeechToTextActivity.this, "Từ cần tra không có trong danh sách", Toast.LENGTH_LONG).show();
                     }
                 }
