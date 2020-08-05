@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.dictionary.ui.login.LoginActivity;
+
 public class MainActivity extends AppCompatActivity {
     String strUserName, strPassword;
 
@@ -16,6 +18,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTitle(getString(R.string.app_name));
         setContentView(R.layout.activity_main);
+        if (checkLoginShap() < 0) {
+            Intent i = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(i);
+        }
+    }
+
+    public int checkLoginShap(){
+        SharedPreferences pref = getSharedPreferences("USER_FILE_",MODE_PRIVATE);
+        boolean chk = pref.getBoolean("REMEMBER",false);
+        if (chk){
+            strUserName = pref.getString("USERNAME","");
+            strPassword = pref.getString("PASSWORD","");
+            return 1;
+        }
+        return -1;
     }
 
     public void viewTranslate(View v) {

@@ -19,10 +19,12 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatSeekBar;
 
 public class InfoAppActivity extends AppCompatActivity {
     Handler mHandler;
     TextView tvTest, tvCount;
+    AppCompatSeekBar seekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +33,30 @@ public class InfoAppActivity extends AppCompatActivity {
         setTitle("Thông tin ứng dụng");
         tvTest = (TextView) findViewById(R.id.tvTest);
         tvCount = (TextView) findViewById(R.id.tvCount);
+        seekBar = (AppCompatSeekBar) findViewById(R.id.seekBar);
         mHandler = new Handler() {
             @Override
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
                 if (msg.obj != null) {
-                    Toast.makeText(InfoAppActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
-                    tvTest.setText(msg.obj.toString());
+                    switch (msg.obj.toString()) {
+                        case "25":
+                            Toast.makeText(InfoAppActivity.this, "Đã tải lên " +msg.obj.toString() + "%", Toast.LENGTH_LONG).show();
+                            seekBar.setProgress(25);
+                            break;
+                        case "50":
+                            Toast.makeText(InfoAppActivity.this, "Đã tải lên " +msg.obj.toString() + "%", Toast.LENGTH_LONG).show();
+                            seekBar.setProgress(50);
+                            break;
+                        case "75":
+                            Toast.makeText(InfoAppActivity.this, "Đã tải lên " +msg.obj.toString() + "%", Toast.LENGTH_LONG).show();
+                            seekBar.setProgress(75);
+                            break;
+                        default:
+                            seekBar.setProgress(100);
+                            Toast.makeText(InfoAppActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                            tvTest.setText(msg.obj.toString());
+                    }
                 }
             }
         };
@@ -95,6 +114,19 @@ public class InfoAppActivity extends AppCompatActivity {
                 TuVungDAO tuVungDAO = new TuVungDAO(InfoAppActivity.this);
                 for (int j = 0; j < listTv.size(); j++) {
                     tuVungDAO.insertTuVung(listTv.get(j));
+                    if (j == listTv.size() / 4) {
+                        Message m = new Message();
+                        m.obj = "25";
+                        mHandler.sendMessage(m);
+                    } else if (j == listTv.size() / 2) {
+                        Message m = new Message();
+                        m.obj = "50";
+                        mHandler.sendMessage(m);
+                    } else if (j == (listTv.size() / 2 + listTv.size() / 4)) {
+                        Message m = new Message();
+                        m.obj = "75";
+                        mHandler.sendMessage(m);
+                    }
                 }
                 Log.d("InfoAppActivity", "Da nap du lieu xong = " + tuVungDAO.getAll().size());
                 Message msg = new Message();
